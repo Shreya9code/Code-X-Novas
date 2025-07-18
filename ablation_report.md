@@ -31,6 +31,8 @@ This study compares a **Baseline 3D CNN** against an **Attention-enhanced Hybrid
 # Hybrid F1 Scores  
 [0.00, 0.00, 0.01, 0.00, 0.00, 0.00, 0.00,
  0.00, 0.00, 0.00, 0.40, 0.00, 0.00, 0.19, 0.00, 0.00]
+ ```
+ 
 ## 🔍 Visual Diagnostics
 
 ### 1. Feature Space Analysis (t-SNE)
