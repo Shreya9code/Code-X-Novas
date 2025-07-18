@@ -18,6 +18,7 @@ This repository contains an advanced hyperspectral image classification pipeline
 ```./
 └── indian_pines_hybrid_model.ipynb # Complete end-to-end solution
 └── ablation_report.md # Results, analysis, and visualizations
+|--/assets
 ├── baseline_tsne.png
 ├── hybrid_tsne.png
 ├── hybrid_confusion_matrix.png
