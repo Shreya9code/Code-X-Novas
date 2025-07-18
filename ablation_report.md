@@ -32,7 +32,7 @@ This study compares a **Baseline 3D CNN** against an **Attention-enhanced Hybrid
 [0.00, 0.00, 0.01, 0.00, 0.00, 0.00, 0.00,
  0.00, 0.00, 0.00, 0.40, 0.00, 0.00, 0.19, 0.00, 0.00]
  ```
- 
+
 ## 🔍 Visual Diagnostics
 
 ### 1. Feature Space Analysis (t-SNE)
@@ -50,8 +50,8 @@ This study compares a **Baseline 3D CNN** against an **Attention-enhanced Hybrid
 
 | Type          | Image | Analysis |
 |---------------|-------|----------|
-| Ground Truth  | ![GT Map][gt_map] | - Expected class distribution <br> - Clear field boundaries visible |
-| Hybrid Model  | ![Hybrid Map][hybrid_map] | - Salt-and-pepper noise pattern <br> - Dominated by few classes (likely mode collapse) <br> - Lacks spatial coherence |
+| Ground Truth  | <img src="assets/hybrid_prediction_vs_gt.png" width="300"/> | - Expected class distribution <br> - Clear field boundaries visible |
+| Hybrid Model  | <img src="assets/hybrid_pred_map.png" width="300"/> | - Salt-and-pepper noise pattern <br> - Dominated by few classes (likely mode collapse) <br> - Lacks spatial coherence |
 
 📌 **Key Insight:** Hybrid predictions show no correlation with ground geography, indicating failed learning.
 
@@ -59,13 +59,25 @@ This study compares a **Baseline 3D CNN** against an **Attention-enhanced Hybrid
 
 ### 3. Confusion Matrix
 
-![Hybrid Confusion Matrix][hybrid_confusion]  
-*(Normalized to show relative errors)*
+<img src="assets/hybrid_confusion_matrix.png" width="500"/>
+*(True labels along Y-axis, predictions along X-axis)*
 
-**Problem Patterns:**
-- 🔴 90%+ predictions in 2-3 classes
-- ⚠️ Diagonal elements nearly absent
-- 📉 Off-diagonal uniformity suggests random guessing
+#### 🔍 Observations:
+- ✅ **Diagonal dominance in a few classes only**, e.g.:
+  - Class `10`: 966 correct
+  - Class `13`: 826 correct
+  - Class `9`: 484 correct
+- ⚠️ **Heavy class imbalance in prediction**
+  - Most predictions concentrated in classes 9, 10, 13
+- ❌ **Poor performance in many classes**:
+  - Class `0`, `3`, `6`, `15`, `8`, `11`, etc., have sparse or scattered predictions
+- 🔁 **Confusions are widespread**:
+  - E.g., Class `0` is confused with 1, 2, 3, 6, 7
+  - Class `10` confused with 1, 2, 11
+
+---
+📌 **Key Insight:**  
+Although the hybrid model performs reasonably well in a few dominant classes (e.g., 10, 13), it fails to generalize across all 16 classes. The prediction distribution is highly skewed — indicating **class imbalance, lack of spatial context learning**, or **mode collapse**.
 
 ---
 
@@ -85,17 +97,14 @@ This study compares a **Baseline 3D CNN** against an **Attention-enhanced Hybrid
 
 ### 5. Component-Wise Gradients
 
-![Gradient Flow][gradient_flow]
+#### a. Baseline Model t-SNE
+<img src="assets/baseline_tsne.png" width="400"/>
 
-**Backpropagation Issues:**
-1. Attention layers show vanishing gradients
-2. CNN layers have unstable gradient magnitudes
-3. Skip connections might be necessary
+- Distinct clusters visible  
+- Shows meaningful class separation  
 
-[baseline_tsne]: images/baseline_tsne.png
-[hybrid_tsne]: images/hybrid_tsne.png
-[gt_map]: images/ground_truth.png  
-[hybrid_map]: images/hybrid_prediction.png
-[hybrid_confusion]: images/confusion_matrix.png
-[loss_curves]: images/loss_curves.png
-[gradient_flow]: images/gradient_flow.png
+#### b. Hybrid Model t-SNE
+<img src="assets/hybrid_tsne.png" width="400"/>
+
+- No clear class separation  
+- Indicates model collapse or failure to learn feature embeddings  
