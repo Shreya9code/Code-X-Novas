@@ -39,8 +39,8 @@ This study compares a **Baseline 3D CNN** against an **Attention-enhanced Hybrid
 
 | Model        | Visualization | Key Observations |
 |--------------|---------------|------------------|
-| **Baseline** | ![Baseline t-SNE][baseline_tsne] | - Clear cluster formation <br> - Some class overlap (expected in HSIs) <br> - 5-6 dominant groupings visible |
-| **Hybrid**   | ![Hybrid t-SNE][hybrid_tsne] | - Diffuse point distribution <br> - No discernible clustering <br> - Suggests feature collapse |
+| **Baseline** | ![Baseline t-SNE](assets/baseline_tsne.png) | - Clear cluster formation <br> - Some class overlap (expected in HSIs) <br> - 5-6 dominant groupings visible |
+| **Hybrid**   |![Hybrid t-SNE](assets/hybrid_tsne.png) | - Diffuse point distribution <br> - No discernible clustering <br> - Suggests feature collapse |
 
 📌 **Interpretation:** The hybrid model fails to learn discriminative features, while the baseline maintains reasonable spectral-spatial separation.
 
